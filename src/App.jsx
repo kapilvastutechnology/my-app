@@ -64,20 +64,22 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
-  const [data, setData] = useState([]);
+  const [todos, setTodos] = useState([]);
 
-  const handleData = (id) => {
-    setData((prev) => prev.filter((user) => user.id !== id));
+  const handleDelete = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
   return (
-    <div className="p-5 max-w-[300px] space-y-5">
+    <div className="p-5 max-w-[350px] space-y-5 mx-auto">
+      <h1 className="text-2xl font-semibold text-center">📝 Todo App</h1>
+
       <Formik
-        initialValues={{ username: "" }}
+        initialValues={{ task: "" }}
         onSubmit={(val, { resetForm }) => {
-          if (val.username.trim() !== "") {
-            const newUser = { id: uuidv4(), name: val.username };
-            setData((prev) => [...prev, newUser]);
+          if (val.task.trim() !== "") {
+            const newTodo = { id: uuidv4(), title: val.task };
+            setTodos((prev) => [...prev, newTodo]);
             resetForm();
           }
         }}
@@ -85,34 +87,41 @@ export default function App() {
         {({ handleChange, handleSubmit, values }) => (
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              name="username"
-              label="Username"
+              name="task"
+              label="Enter a task"
               size="sm"
               variant="bordered"
-              value={values.username}
+              value={values.task}
               onChange={handleChange}
             />
             <Button type="submit" color="primary" fullWidth>
-              Submit
+              Add Task
             </Button>
           </form>
         )}
       </Formik>
 
       <div className="space-y-3">
-        {data.map((user) => (
-          <div key={user.id} className="flex justify-between items-center border-b pb-1">
-            <h1>{user.name}</h1>
-            <Button
-              size="sm"
-              color="warning"
-              isIconOnly
-              onPress={() => handleData(user.id)}
+        {todos.length === 0 ? (
+          <p className="text-center text-gray-500 text-sm">No tasks yet</p>
+        ) : (
+          todos.map((todo) => (
+            <div
+              key={todo.id}
+              className="flex justify-between items-center border-b pb-1"
             >
-              <i className="fa-solid fa-trash"></i>
-            </Button>
-          </div>
-        ))}
+              <h1>{todo.title}</h1>
+              <Button
+                size="sm"
+                color="warning"
+                isIconOnly
+                onPress={() => handleDelete(todo.id)}
+              >
+                <i className="fa-solid fa-trash"></i>
+              </Button>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
