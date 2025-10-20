@@ -7,9 +7,9 @@ import { store } from './app/store';
 
 
 createRoot(document.getElementById('root')).render(
-  <HeroUIProvider store={store} >
-    <Provider>
-    <App/>
+  <HeroUIProvider>
+    <Provider store={store} >
+        <App/>
     </Provider>
   </HeroUIProvider>
 );

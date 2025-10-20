@@ -1,4 +1,5 @@
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@heroui/react";
+import { NavLink } from "react-router";
 export default function Header() {
   return (
     <Navbar>
@@ -24,12 +25,7 @@ export default function Header() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
+          <NavLink to={'/add-user'} >Add User</NavLink>
         </NavbarItem>
       </NavbarContent>
     </Navbar>

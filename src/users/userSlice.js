@@ -7,9 +7,9 @@ export const userSlice = createSlice({
 
    reducers:{
     setUser: (state, action) =>{
-
+      state.users.push(action.payload);
     }
    }
 })
 
-export const {setUser} = userSlice;
+export const {setUser} = userSlice.actions;
