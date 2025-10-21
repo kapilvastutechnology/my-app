@@ -8,9 +8,11 @@ export default function Header() {
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
+          {/* <Link color="foreground" href="#">
             Features
-          </Link>
+          </Link> */}
+          <NavLink to={'/add-user'}>Features</NavLink>
+          
         </NavbarItem>
         <NavbarItem isActive>
           <Link aria-current="page" href="#">
