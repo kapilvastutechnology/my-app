@@ -3,8 +3,8 @@ import {Checkbox} from "@heroui/react";
 import { Formik } from "formik";
 import {RadioGroup, Radio} from "@heroui/react";
 import * as Yup from 'yup';
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
 import { setUser } from "./userSlice";
 import { nanoid } from "@reduxjs/toolkit";
 const habits = ['dance', 'sing', 'code', 'swin']
@@ -23,7 +23,11 @@ const valSchema = Yup.object({
   description:Yup.string().required()
 })
 
-export default function UserAdd() {
+export default function UserEdit() {
+  const {id} = useParams();
+  const {users} = useSelector((state)=> state.userSlice);
+  const user = users.find((user)=> user.id === id);
+  console.log(user);
   const dispatch = useDispatch();
   const nav = useNavigate();
   return (
@@ -31,12 +35,12 @@ export default function UserAdd() {
       <Formik
       
       initialValues={{
-        username:'',
-        email:'',
-        habits:[],
-        gender:'',
-        country:'',
-        description:''
+        username:user.username,
+        email:user.email,
+        habits:user.habits,
+        gender:user.gender,
+        country:user.country,
+        description:user.description,
       }}
 
       onSubmit={(val)=>{
@@ -81,6 +85,7 @@ export default function UserAdd() {
           {habits.map((habit,index)=>{
             return <Checkbox 
             key={index}
+            defaultSelected = {values.habits.includes(habit)}
           onChange={handleChange}
           value={habit} name='habits' >{habit}</Checkbox>
           })}
@@ -90,7 +95,8 @@ export default function UserAdd() {
 
 
       <div>
-      <RadioGroup label="Select your Gender" name="gender"  onChange={handleChange}>
+      <RadioGroup label="Select your Gender" 
+      name="gender"  onChange={handleChange} defaultValue={values.gender} >
       <Radio value="male">Male</Radio>
       <Radio value="female ">Female</Radio>
       <Radio value="other">Other</Radio>
@@ -99,6 +105,7 @@ export default function UserAdd() {
     {errors.gender && touched.gender &&  <p className="text-red-500" > {errors.gender}</p>}
 
      <Select
+     defaultSelectedKeys={[values.country]}
       className="max-w-xs"
       name="country"
       onChange={handleChange}
@@ -113,6 +120,7 @@ export default function UserAdd() {
 
        <Textarea
         onChange={handleChange}
+        value={values.description}
         name="description"
         className="max-w-xs" 
         label="Description"

@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router"
 import RootLayout from "./components/RootLayout"
 import Home from "./home/Home"
 import UserAdd from "./users/UserAdd"
+import UserEdit from "./users/UserEdit"
 export default function App() {
   const router = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ export default function App() {
         {
           path:'add-user',
           element:<UserAdd/>
+        },
+        {
+          path:'edit-user/:id',
+          element:<UserEdit/>
         }
 
       ]
