@@ -17,11 +17,15 @@ export const userSlice = createSlice({
       setUsersToLocal(state.users);
     },
 
-    // updateUser:(state,action)=>{
-    // }
-
+    // its is part of update data
+    updateUser: (state,action)=>{
+      state.users = state.users.map((user)=>{
+        return user.id === action.payload.id ? action.payload:user;
+      });
+      setUsersToLocal(state.users);
+    }
 
    }
 })
 
-export const {setUser, removeUser} = userSlice.actions;
+export const {setUser, removeUser,updateUser} = userSlice.actions;

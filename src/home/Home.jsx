@@ -33,7 +33,7 @@ export default function Home() {
         <Button
         onPress={()=>nav(`/edit-user/${user.id}`)}
         isIconOnly aria-label="Like" color="warning">
-        <i class="fa-solid fa-pen-to-square"></i>
+        <i className="fa-solid fa-pen-to-square"></i>
       </Button>
 
      <RemoveUser index={i} />

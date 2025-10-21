@@ -18,7 +18,7 @@ export default function RemoveUser({index}) {
     <>
 
      <Button onPress={onOpen} isIconOnly aria-label="Like" color="danger">
-      <i class="fa-solid fa-trash"></i>
+      <i className="fa-solid fa-trash"></i>
       </Button>
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

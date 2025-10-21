@@ -5,8 +5,8 @@ import {RadioGroup, Radio} from "@heroui/react";
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { setUser } from "./userSlice";
-import { nanoid } from "@reduxjs/toolkit";
+import {  updateUser } from "./userSlice";
+// import { nanoid } from "@reduxjs/toolkit";
 const habits = ['dance', 'sing', 'code', 'swin']
 const countries = [
   {key: "nepal", label: "Nepal"},
@@ -43,13 +43,22 @@ export default function UserEdit() {
         description:user.description,
       }}
 
+      // it is used for set data
+      // onSubmit={(val)=>{
+      //   dispatch(setUser({
+      //     ...val,
+      //     id:nanoid()
+      //   }));
+      //   nav(-1);
+      // }}
+
+      // it's used for udpate data only call (updateUser) and no need to set new id like nanoid() replace with id
       onSubmit={(val)=>{
-        dispatch(setUser({
+        dispatch(updateUser({
           ...val,
-          id:nanoid()
-        }));
+          id:id
+        }))
         nav(-1);
-        // console.log(val);
       }}
 
       validationSchema={valSchema}
