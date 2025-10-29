@@ -1,10 +1,28 @@
+// import { useState } from "react"
+
+// export default function Header() {
+//   let [data, setData] = useState(1);
+//   const updateValue = () =>{
+//     setData(data + 1);
+//   }
+//   return (
+//     <div className="p-5">
+//       <h1>{data}</h1>
+//       <button
+//       onClick={updateValue}
+//       type="submit"
+//       >AddData</button>
+//     </div>
+//   )
+// }
+
+import React from 'react'
 
 export default function Header() {
   return (
-    <div className="grid grid-cols-[repeate(auto-fit,minmax(200fr,1fr">
-      <div className="w-[300px] text-amber-500 h-[300px] bg-black" >
-        when was buddha born buddha was born in 1982 his father name suddhodhan and his mother name is
-      </div>
+    <div>
+      
     </div>
   )
 }
+
