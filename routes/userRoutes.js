@@ -1,17 +1,15 @@
-import express from "express";
-import { createUser, deleteUser, getUser, getUsers, updateUser } from "../controllers/userController.js";
-import { notAllowed } from "../utils/notAllowed.js";
-export const router = express.Router();
+import express from 'express';
+import { allUser, createUser, deleteUser, singleUser, updateUser } from '../controllers/userController.js';
 
+const router = express.Router();
 
 router.route('/api/users')
- .get(getUsers)
- .post(createUser).all(notAllowed);
+.get(allUser)
+.post(createUser)
 
 router.route('/api/users/:id')
- .get(getUser)
- .patch(updateUser)
- .delete(deleteUser).all(notAllowed);
+.get(singleUser)
+.patch(updateUser)
+.delete(deleteUser)
 
-
- export default router;
+export default router;

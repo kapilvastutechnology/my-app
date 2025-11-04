@@ -1,20 +1,27 @@
-import express from "express";
+import express from 'express';
+import mongoose from 'mongoose';
 import userRoutes from './routes/userRoutes.js';
 const app = express();
 const port = 5000;
 
 app.use(express.json());
+app.use(userRoutes);
 
-app.get('/', (req, res) => {
+mongoose.connect('mongodb+srv://Anuj:Anuj2005@anujapi.pcejgp8.mongodb.net/users').then((val)=>{
+    app.listen(port, () => {
+    console.log(' mongoose connected and  server is running');
+});
+}).catch((err)=>{
+    console.log(err);
+})
+
+
+app.get('/',(req, res)=>{
     return res.status(200).json({
-        status:'success',
         data: 'welcome to server'
     })
-});
+})
 
-app.use(userRoutes); // route lai import gareko ho and route lai kaam garaunu ko use bhaye ko xha
-app.listen(port, () => {
-    console.log('server is running ');
-});
+
 
 
