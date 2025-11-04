@@ -1,11 +1,22 @@
 import User from "../modules/user.js"
 
-export const allUser = (req,res)=>{
-    return res.status(200).json({data:'get all users'})
+export const allUser = async (req,res)=>{
+    try {
+        const user = await User.find({});
+        return res.status(200).json({data:user})
+    } catch (err) {
+        return res.status(500).json({data:err.message})
+    }
 }
 
-export const singleUser = (req,res)=>{
-    return res.status(200).json({data:'get single user'})
+export const singleUser = async (req,res)=>{
+    try {
+        const {id} = req.params;
+        const user = await User.findById(id);
+        res.status(200).json({status: 'success', data: user})
+    } catch (err) {
+        return res.status(500).json({data: err.message})
+    }
 }
 
 export const createUser = async (req,res)=>{

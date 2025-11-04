@@ -16,7 +16,7 @@ import mongoose from "mongoose";
         type:String,
         enum:['BCA', 'DICS', 'BTCES']
     }
-},)
+},{timestamps:true})
 
 
 const User = mongoose.model('User',userSchema);
