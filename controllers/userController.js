@@ -1,5 +1,5 @@
 import User from "../modules/User.js"
-
+import fs from 'fs';
 export const allUser = async (req,res)=>{
     try {
         const user = await User.find({});
@@ -21,13 +21,13 @@ export const singleUser = async (req,res)=>{
 
 export const createUser = async (req,res)=>{
     const {name, age, course, image} = req.body ?? {};
-
+    console.log(req.imagePath);
    try {
      const user =   await User.create({
             name,
             age,
             course,
-            image
+            image:req.imagePath
         });
 
         return res.status(201).json({
@@ -35,10 +35,13 @@ export const createUser = async (req,res)=>{
             data: 'user successfully added'
         })
    } catch (err) {
-     return res.status(400).json({
+    
+    fs.unlink(`./uploads/${req.imagePath}`,(error)=>{
+         return res.status(400).json({
         status: 'error',
         data: err.message
      })
+    })
    }
 }
 
