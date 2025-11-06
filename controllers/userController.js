@@ -1,11 +1,11 @@
-import User from "../modules/user.js"
+import User from "../modules/User.js"
 
 export const allUser = async (req,res)=>{
     try {
         const user = await User.find({});
         return res.status(200).json({data:user})
     } catch (err) {
-        return res.status(500).json({data:err.message})
+        return res.status(400).json({data:err.message})
     }
 }
 
@@ -20,20 +20,26 @@ export const singleUser = async (req,res)=>{
 }
 
 export const createUser = async (req,res)=>{
-    const { username, age, course } = req.body ?? {};
-    try {
-        const user = await User.create({
-            username,
+    const {name, age, course, image} = req.body ?? {};
+
+   try {
+     const user =   await User.create({
+            name,
             age,
-            course
+            course,
+            image
         });
-        return res.status(201).json({status:'success', data:'User added successfully'})
-    } catch (err) {
-        return res.status(400).json({
-            status:'error',
-            data: err.message
+
+        return res.status(201).json({
+            status: 'success',
+            data: 'user successfully added'
         })
-    }
+   } catch (err) {
+     return res.status(400).json({
+        status: 'error',
+        data: err.message
+     })
+   }
 }
 
 
